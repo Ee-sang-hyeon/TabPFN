@@ -98,6 +98,14 @@ r2 = r2_score(y_test, predictions)
 
 print("Mean Squared Error (MSE):", mse)
 print("R² Score:", r2)
+
+# 95% confidence interval for the predictions
+lower, upper = regressor.predict(
+    X_test,
+    output_type="quantiles",
+    quantiles=[0.025, 0.975],
+)
+print("First sample interval:", lower[0], "-", upper[0])
 ```
 
 ### Best Results

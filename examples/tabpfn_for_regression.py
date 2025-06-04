@@ -43,3 +43,16 @@ for q, q_pred in zip(quantiles, quantile_predictions):
 # Predict with mode
 mode_predictions = reg.predict(X_test, output_type="mode")
 print("Mode MAE:", mean_absolute_error(y_test, mode_predictions))
+
+# Predict a 95% confidence interval using quantiles
+ci_quantiles = [0.025, 0.975]
+ci_lower, ci_upper = reg.predict(
+    X_test,
+    output_type="quantiles",
+    quantiles=ci_quantiles,
+)
+for idx in range(5):
+    print(
+        f"Pred {idx}: {predictions[idx]:.2f}"
+        f"\tCI [{ci_lower[idx]:.2f}, {ci_upper[idx]:.2f}]"
+    )
